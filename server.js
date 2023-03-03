@@ -8,6 +8,7 @@ const server = net.createServer((socket) => {
     const msg = data.toString();
     console.log('received data:', msg);
     robot.typeString(msg);
+    socket.write('server response');
   });
 
   socket.on('end', () => {
