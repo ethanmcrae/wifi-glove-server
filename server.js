@@ -22,5 +22,5 @@ server.on('error', (err) => {
 
 server.listen(3000, () => {
   // Command to determine public address: ifconfig | grep 'inet ' | grep -v 127.0.0.1
-  console.log("listening on 10.87.247.9:3000");
+  console.log("listening on port 3000");
 });
