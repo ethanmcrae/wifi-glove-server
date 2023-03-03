@@ -7,8 +7,7 @@ const server = net.createServer((socket) => {
   socket.on('data', (data) => {
     const msg = data.toString();
     console.log('received data:', msg);
-    robot.typeString(msg); // Not working for some reason... I think it's a permissions thing?
-    socket.write('server response');
+    robot.typeString(msg);
   });
 
   socket.on('end', () => {
