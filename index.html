@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>WebSocket Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  </head>
+  <body>
+    <h1>WebSocket Example</h1>
+    <ul id="list-container"></ul>
+    <script>
+      const listContainer = document.getElementById('list-container');
+      console.log('Trying to connect to: ' + 'ws://' + window.location.hostname + ':3001')
+      const socket = new WebSocket('ws://' + window.location.hostname + ':3001');
+      socket.addEventListener('open', () => {
+        console.log('WebSocket connection established');
+      });
+      socket.addEventListener('message', (event) => {
+        console.log('Received message:', event.data);
+        // console.log(typeof event.data);
+        populateList(JSON.parse(event.data));
+      });
+      socket.onerror = (error) => {
+        console.error('WebSocket error:', error);
+      };
+      socket.addEventListener('close', (event) => {
+        console.log('WebSocket connection closed with code:', event.code, 'and reason:', event.reason);
+        // Perform any necessary cleanup or retry logic here
+      });
+      function populateList(arr) {
+        const listContainer = document.getElementById('list-container');
+
+        // Remove any existing list items
+        while (listContainer.firstChild) {
+          listContainer.removeChild(listContainer.firstChild);
+        }
+
+        // Add each element in the array as a list item
+        arr.forEach((item) => {
+          const listItem = document.createElement('li');
+          listItem.textContent = item;
+          listContainer.appendChild(listItem);
+        });
+      }
+    </script>
+    <style>
+      body {
+        background-color: #111;
+        color: #eee;
+        font-size: 24px;
+        line-height: 1.5;
+        font-family: Arial, sans-serif;
+      }
+
+      h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      #list-container {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      #list-container li {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        background-color: #333;
+      }
+
+      #list-container li:hover {
+        background-color: #444;
+      }
+    </style>
+  </body>
+</html>

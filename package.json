@@ -4,7 +4,7 @@
   "description": "The server that accepts incoming requests from a wifi glove to stimulate keypresses on the computer.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server",
+    "start": "nodemon main",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
