@@ -13,6 +13,7 @@
       const socket = new WebSocket('ws://' + window.location.hostname + ':3001');
       socket.addEventListener('open', () => {
         console.log('WebSocket connection established');
+        populateList([]);
       });
       socket.addEventListener('message', (event) => {
         console.log('Received message:', event.data);
@@ -32,6 +33,10 @@
         // Remove any existing list items
         while (listContainer.firstChild) {
           listContainer.removeChild(listContainer.firstChild);
+        }
+
+        if (arr.length === 0) {
+          arr = ['0 -> UPPER / NUMBERS / SYMBOLS', '1 -> LOWER'];
         }
 
         // Add each element in the array as a list item

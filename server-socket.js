@@ -14,7 +14,10 @@ const picoServer = net.createServer((socket) => {
     const msg = data.toString();
     console.log('received data:', msg);
     const res = translate(msg);
-    if (typeof res === 'string') robot.typeString(res);
+    if (typeof res === 'string') {
+      robot.typeString(res);
+      clients.HTTP.send('[]');
+    }
     else if (clients.HTTP) clients.HTTP.send(JSON.stringify(res));
     else console.log('Could not send data to HTTP client');
   });
